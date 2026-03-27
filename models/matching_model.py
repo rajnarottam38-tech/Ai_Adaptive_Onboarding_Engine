@@ -1,12 +1,5 @@
-from __future__ import annotations
-
-import math
-from typing import Iterable
-
-
 class MatchingModel:
     def __init__(self) -> None:
-        self.model = None
         self.related = {
             "AWS": ["Cloud/DevOps", "Docker", "Kubernetes", "GCP", "Azure"],
             "Machine Learning": ["Data Analysis", "NLP", "Deep Learning"],
@@ -16,55 +9,34 @@ class MatchingModel:
             "SQL": ["Data Analysis", "PostgreSQL"],
             "Kubernetes": ["Docker", "Cloud/DevOps"],
         }
-        try:
-            from sentence_transformers import SentenceTransformer
-
-            self.model = SentenceTransformer("all-MiniLM-L6-v2")
-        except Exception:
-            self.model = None
 
     def _simple_similarity(self, a: str, b: str) -> float:
         aset = set(a.lower().split())
         bset = set(b.lower().split())
         if not aset or not bset:
             return 0.0
-        return len(aset.intersection(bset)) / len(aset.union(bset))
+        return len(aset & bset) / len(aset | bset)
 
-    def _cosine(self, vec_a, vec_b) -> float:
-        dot = float((vec_a * vec_b).sum())
-        denom = math.sqrt(float((vec_a * vec_a).sum())) * math.sqrt(float((vec_b * vec_b).sum()))
-        return dot / denom if denom else 0.0
-
-    def skill_list_similarity(self, user_skills: Iterable[str], required_skills: Iterable[str]) -> float:
-        u = list(user_skills)
-        r = list(required_skills)
-        if not u or not r:
+    def skill_list_similarity(self, user_skills: list[str], required_skills: list[str]) -> float:
+        if not user_skills or not required_skills:
             return 0.0
-        if self.model is None:
-            return sum(self._simple_similarity(x, y) for x in u for y in r) / (len(u) * len(r))
-
-        u_vec = self.model.encode([" ".join(u)])[0]
-        r_vec = self.model.encode([" ".join(r)])[0]
-        return self._cosine(u_vec, r_vec)
+        return sum(self._simple_similarity(x, y) for x in user_skills for y in required_skills) / (
+            len(user_skills) * len(required_skills)
+        )
 
     def semantic_similarity(self, a: str, b: str) -> float:
         if a.lower() == b.lower():
             return 1.0
         related_a = set(self.related.get(a, []))
         related_b = set(self.related.get(b, []))
-        if b in related_a or a in related_b or related_a.intersection(related_b):
+        if b in related_a or a in related_b or related_a & related_b:
             return 0.62
-        if self.model is None:
-            return self._simple_similarity(a, b)
-        vecs = self.model.encode([a, b])
-        return float(self._cosine(vecs[0], vecs[1]))
+        return self._simple_similarity(a, b)
 
     def semantic_overlap(self, user_skills: list[str], required_skills: list[str], threshold: float = 0.6) -> int:
         if not user_skills or not required_skills:
             return 0
-        hits = 0
-        for req in required_skills:
-            best = max(self.semantic_similarity(req, usr) for usr in user_skills)
-            if best >= threshold:
-                hits += 1
-        return hits
+        return sum(
+            1 for req in required_skills
+            if max(self.semantic_similarity(req, usr) for usr in user_skills) >= threshold
+        )
