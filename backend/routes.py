@@ -3,24 +3,18 @@ from pydantic import BaseModel
 
 try:
     from backend.services.gap_analyzer import GapAnalyzer
-    from backend.services.jd_parser import JDParser
     from backend.services.learning_path_generator import LearningPathGenerator
-    from backend.services.resume_parser import ResumeParser
     from backend.services.skill_extractor import SkillExtractor
     from backend.utils.file_handler import extract_text
 except ModuleNotFoundError:
     # Supports running from backend/ with: uvicorn app:app
     from services.gap_analyzer import GapAnalyzer
-    from services.jd_parser import JDParser
     from services.learning_path_generator import LearningPathGenerator
-    from services.resume_parser import ResumeParser
     from services.skill_extractor import SkillExtractor
     from utils.file_handler import extract_text
 
 router = APIRouter()
 
-resume_parser = ResumeParser()
-jd_parser = JDParser()
 skill_extractor = SkillExtractor()
 gap_analyzer = GapAnalyzer()
 path_generator = LearningPathGenerator()
@@ -59,8 +53,8 @@ async def upload_jd(file: UploadFile = File(...)) -> dict:
 
 @router.post("/analyze")
 def analyze(payload: AnalyzeRequest) -> dict:
-    resume_text = resume_parser.parse(STATE["resume_text"])
-    jd_text = jd_parser.parse(STATE["jd_text"])
+    resume_text = (STATE["resume_text"] or "").strip()
+    jd_text = (STATE["jd_text"] or "").strip()
 
     resume_profile = skill_extractor.extract_resume_skills(resume_text)
     jd_profile = skill_extractor.extract_jd_skills(jd_text)
