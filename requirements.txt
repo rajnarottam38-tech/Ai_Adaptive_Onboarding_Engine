@@ -3,5 +3,4 @@ uvicorn[standard]
 python-multipart
 pydantic
 numpy
-sentence-transformers
 PyMuPDF
