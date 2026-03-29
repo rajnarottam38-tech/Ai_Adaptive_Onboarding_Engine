@@ -1,9 +1,10 @@
 __pycache__/
 *.pyc
-*.pyo
 .venv/
 venv/
 .env
 node_modules/
 dist/
 .dist/
+.vscode/
+AI-Onboarding-Engine/
