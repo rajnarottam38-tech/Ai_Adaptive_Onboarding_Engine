@@ -2,8 +2,10 @@ import sys
 import os
 from pathlib import Path
 
+# Ensure repo root is on sys.path so `backend` and `models` are importable
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,9 +23,11 @@ app.add_middleware(
 
 app.include_router(router)
 
+
 @app.get("/")
 def root():
     return {"status": "ok"}
+
 
 @app.get("/health")
 def health():
