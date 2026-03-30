@@ -1,7 +1,7 @@
 # AI Adaptive Onboarding Engine
 End-to-end AI onboarding system that analyzes a candidate resume against a job description and understand their current skils, detects skill gaps, and produces a personalized learning roadmap with explainable reasoning for improvement.
 
-The goal is simple:  
+The goal is to:  
 1.) Reduce unnecessary training  
 2.) Focus only on what the candidate actually needs  
 
