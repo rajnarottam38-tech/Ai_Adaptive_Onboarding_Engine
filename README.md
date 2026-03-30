@@ -12,6 +12,7 @@ Instead of giving every new hire the same training, this system:
 - Identifies missing or weak areas
 - Generates a structured learning path  
 - Explains *why* those recommendations were made
+
 ## Team Contribution
 This project was developed as a collaborative team effort. Each team member contributed to different aspects of the system:
 - Designing AI-based logic for skill gap analysis
@@ -64,6 +65,7 @@ AI_ADAPTIVE_ENGINE/
 ├── README.md
 ├── railway.toml
  ```
+
 ## Tech Stack
 **Frontend**
 - React (Vite)
@@ -111,7 +113,7 @@ AI_ADAPTIVE_ENGINE/
   - npm run dev
   - Frontend will run on:
     http://localhost:5173
-- Optional (Virtual Environment Recommended)
+- 4️⃣ Optional (Virtual Environment Recommended)
   - python -m venv venv
   - venv\Scripts\activate   
   - pip install -r requirements.txt
