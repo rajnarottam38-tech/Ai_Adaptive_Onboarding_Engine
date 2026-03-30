@@ -1,6 +1,6 @@
 # AI Adaptive Onboarding Engine
 End-to-end AI onboarding system that analyzes a candidate resume against a job description and understand their current skils, detects skill gaps, and produces a personalized learning roadmap with explainable reasoning for improvement.
-The goal is simple:  
+- The goal is simple:  
 1.) Reduce unnecessary training  
 2.) Focus only on what the candidate actually needs  
 
@@ -28,10 +28,10 @@ This project highlights teamwork, problem-solving, and real-world AI application
 -  Adaptive learning roadmap generation
 -  Explainable reasoning trace 
 -  Interactive dashboard with:
-  - Skill breakdown charts
-  - Progress indicators
-  - Recommendations
-  - Reasoning insights
+   - Skill breakdown charts
+   - Progress indicators
+   - Recommendations
+   - Reasoning insights
 
 ## Folder Structure
 AI_ADAPTIVE_ENGINE/
@@ -93,14 +93,14 @@ AI_ADAPTIVE_ENGINE/
   - cd ~/Downloads/Ai_adaptive_engine
   - pip install -r requirements.txt
   - uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
-- Backend will run on:
-👉 http://127.0.0.1:8000
+  - Backend will run on:
+    http://127.0.0.1:8000
 - 3️⃣ Frontend Setup
   - cd ~/Downloads/Ai_adaptive_engine/frontend
   - npm install
   - npm run dev
- - Frontend will run on:
-👉 http://localhost:5173
+  - Frontend will run on:
+    http://localhost:5173
 - Optional (Virtual Environment Recommended)
   - python -m venv venv
   - venv\Scripts\activate   
@@ -108,14 +108,14 @@ AI_ADAPTIVE_ENGINE/
 
 ## Deployment
  Live Project Link:
-👉 https://ai-adaptive-onboarding-engine-kappa.vercel.app?_vercel_share=NnIumuOUUcJkucg0uAEukEdhOO1oXnuI (Frontend)
-👉 https://aiadaptiveonboardingengine-production.up.railway.app/ (Backend)
+- 👉 https://ai-adaptive-onboarding-engine-kappa.vercel.app?_vercel_share=NnIumuOUUcJkucg0uAEukEdhOO1oXnuI (Frontend)
+- 👉 https://aiadaptiveonboardingengine-production.up.railway.app/ (Backend)
 
 ## Future Enhancements
 - Integration with LLM
 - Dashboard with analytics
 - User authentication system
--  Mobile responsiveness improvements
+- Mobile responsiveness improvements
 
 ## Acknowledgment
 Special thanks to all team members for their collaboration and contribution in making this project successful.
